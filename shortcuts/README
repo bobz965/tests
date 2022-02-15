@@ -9,17 +9,26 @@ https://github.com/javimox/kommands
 
 ``` bash
 
+
+# 1. 
+
+\cp kubectl-shortcuts.sh ~/.kubectl-shortcuts.sh
+echo 'source ~/.kubectl-shortcuts.sh' >> /etc/profile
+
+
+# 2. 
+
 mkdir -p /root/.kube/kommands/
 
 \cp .kommands ~/.kube/kommands/.kommands
 
 
-bash
+### bash
 
 
 echo "source ~/.kube/kommands/.kommands" >> ~/.bashrc && source ~/.bashrc
 
-zsh
+### zsh
 
 echo "source ~/.kube/kommands/.kommands" >> ~/.zshrc && source ~/.zshrc
 

@@ -1,0 +1,11 @@
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: macvlan
+spec:
+  protocol: IPv4
+  provider: macvlan.default
+  cidrBlock: 172.20.30.0/24
+  gateway: 172.20.30.1
+  excludeIps:
+  - 172.20.30.1..172.20.30.100
