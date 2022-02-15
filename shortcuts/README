@@ -1,0 +1,29 @@
+## ref
+
+https://gist.github.com/tamas-molnar/32a07c0eb83e95484e3cdb4b7fada32b
+https://github.com/javimox/kommands
+
+
+## install
+
+
+``` bash
+
+mkdir -p /root/.kube/kommands/
+
+\cp .kommands ~/.kube/kommands/.kommands
+
+
+bash
+
+
+echo "source ~/.kube/kommands/.kommands" >> ~/.bashrc && source ~/.bashrc
+
+zsh
+
+echo "source ~/.kube/kommands/.kommands" >> ~/.zshrc && source ~/.zshrc
+
+```
+
+
+

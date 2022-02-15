@@ -1,0 +1,43 @@
+kube-vip-just-arp-LB
+
+####### 1. kubeproxy ipvs使能严格的ARP
+
+```bash
+# 在开始之前，我们应该确保ipvs已经使能了严格的ARP:
+$ kubectl describe configmap -n kube-system kube-proxy | grep ARP
+  strictARP: false
+  
+# 如果这是false，我们可以使用命令启用它:
+$ kubectl get configmap kube-proxy -n kube-system -o yaml | \
+ sed -e "s/strictARP: false/strictARP: true/" | \
+ kubectl apply -f - -n kube-system
+ 
+# 确认:
+$ kubectl describe configmap -n kube-system kube-proxy | grep ARP
+  strictARP: true
+  
+```
+###### 2. 部署
+
+```bash
+wget https://kube-vip.io/manifests/kube-vip-arp.yaml
+
+sed -i 's/ens160/eth0/g' kube-vip-arp.yaml
+
+# 扩大授权的资源
+sed -i 's|"services"|"services", "services/status", "nodes"|g' kube-vip-arp.yaml
+
+# 下载ccm
+wget https://kube-vip.io/manifests/controller.yaml
+
+# eth0 openstack victoria dev 测试段
+
+kubectl create configmap --namespace kube-system kubevip --from-literal range-global=10.120.12.201-10.120.12.210
+
+sed -i 's|ghcr.io/kube-vip/kube-vip|plndr/kube-vip|g' kube-vip-arp.yaml
+
+kubectl apply -f configmap.yaml
+kubectl apply -f controller.yaml
+kubectl apply -f kube-vip-arp.yaml
+
+```
