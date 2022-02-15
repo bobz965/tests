@@ -1,0 +1,11 @@
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: pubnet
+spec:
+  cidrBlock: 10.120.24.0/21
+  excludeIps:
+  - 10.120.24.0..10.120.31.200
+  - 10.120.31.220..10.120.31.254
+  gateway: 10.120.31.254
+  vlan: pubnet

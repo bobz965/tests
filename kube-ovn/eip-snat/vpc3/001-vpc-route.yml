@@ -1,0 +1,7 @@
+kind: Vpc
+apiVersion: kubeovn.io/v1
+metadata:
+  name: vpc3
+spec:
+  namespaces:
+  - vpc3

@@ -1,0 +1,8 @@
+kind: VpcNatGateway
+apiVersion: kubeovn.io/v1
+metadata:
+  name: ngw
+spec:
+  vpc: test-vpc-1                  # Specifies which VPC the gateway belongs to
+  subnet: net1                       # Subnet in VPC
+  lanIp: 192.168.11.254                # Internal IP for nat gateway pod, IP should be within the range of the subnet

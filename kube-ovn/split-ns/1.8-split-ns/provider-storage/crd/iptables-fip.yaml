@@ -1,0 +1,8 @@
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: gw4
+spec:
+  vpc: vpc4
+  subnet: vpc4-subnet
+  lanIp: 192.168.4.254

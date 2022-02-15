@@ -1,0 +1,9 @@
+apiVersion: kubeovn.io/v1
+kind: Vlan
+metadata:
+  name: storage
+  namespace: storage
+spec:
+  logicalInterfaceName: eth3
+  providerInterfaceName: provider2
+  vlanId: 0

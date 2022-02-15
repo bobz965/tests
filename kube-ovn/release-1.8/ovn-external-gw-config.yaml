@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ovn-external-gw-config
+  namespace: kube-system
+data:
+  type: "distributed"                   # centralized or distributed
+  enable-external-gw: "true"
+  external-gw-nodes: "kube-ovn-worker"  # NodeName in kubernetes which will act the overlay to underlay gateway functions, if type is distributed no need set this field
+  external-gw-nic: "eth1"               # The nic that will be bridged into ovs and act as overlay to underlay gateway
+  nic-ip: "10.120.31.254/21"               # The ip and mask of the underlay physical gateway
+  nic-mac: "60:f1:8a:54:c0:92"          # The mac of the underlay physical gateway

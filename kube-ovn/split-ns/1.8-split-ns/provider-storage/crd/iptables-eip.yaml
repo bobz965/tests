@@ -1,0 +1,8 @@
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: gw4-10.120.13.232-24
+spec:
+  natGwDp: gw4
+  eipCIDR: 10.120.13.232/24
+  gateway: 10.120.13.254

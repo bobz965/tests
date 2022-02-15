@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+data:
+  image: kubeovn/vpc-nat-gateway:v1.9.0-x86
+  enable-vpc-nat-gw: "true"
+  nic: eth2
+metadata:
+  name: ovn-vpc-nat-gw-config
+  namespace: kube-system

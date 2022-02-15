@@ -1,0 +1,4 @@
+ln -s /root/kube-ovn/dist/images/install.sh  install.sh
+bash  install.sh 
+
+

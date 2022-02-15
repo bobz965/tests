@@ -1,0 +1,27 @@
+apiVersion: kubeovn.io/v1
+kind: Vlan
+metadata:
+  name: storage
+  namespace: default
+spec:
+  logicalInterfaceName: eth3
+  providerInterfaceName: provider2
+  vlanId: 0
+
+---
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: storage
+spec:
+  cidrBlock: 10.120.13.0/24
+  excludeIps:
+  - 10.120.13.1..10.120.13.200
+  default: false
+  gateway: 10.120.13.254
+  gatewayType: distributed
+  natOutgoing: false
+  vlan: storage
+  underlayGateway: true # If the gateway exist in physical switch please set underlayGateway to true, otherwise kube-ovn will create a virtual one
+  namespaces: 
+    - default

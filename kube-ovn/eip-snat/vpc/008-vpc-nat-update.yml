@@ -1,0 +1,25 @@
+kind: VpcNatGateway
+apiVersion: kubeovn.io/v1
+metadata:
+  name: ngw
+spec:
+  vpc: test-vpc-1                  # Specifies which VPC the gateway belongs to
+  subnet: net1                       # Subnet in VPC
+  lanIp: 192.168.11.254                # Internal IP for nat gateway pod, IP should be within the range of the subnet
+  eips:                            # Underlay IPs assigned to the gateway
+    - eipCIDR: 10.120.30.251/21
+      gateway: 10.120.31.254
+    - eipCIDR: 10.120.30.252/21
+      gateway: 10.120.31.254
+  floatingIpRules:
+    - eip: 10.120.30.251
+      internalIp: 192.168.11.3
+  dnatRules:
+    - eip: 10.120.30.252
+      externalPort: '8888'
+      protocol: tcp
+      internalIp: 192.168.11.4
+      internalPort: '80'
+  snatRules:
+    - eip: 10.120.30.252
+      internalCIDR: 10.0.1.0/24

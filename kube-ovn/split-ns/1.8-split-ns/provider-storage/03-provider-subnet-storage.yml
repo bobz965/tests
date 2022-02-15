@@ -1,0 +1,11 @@
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: storage
+spec:
+  cidrBlock: 10.120.13.0/24
+  excludeIps:
+  - 10.120.13.1..10.120.13.160
+  - 10.120.13.200..10.120.13.254
+  gateway: 10.120.13.254
+  vlan: storage

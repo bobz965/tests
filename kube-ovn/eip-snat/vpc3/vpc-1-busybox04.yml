@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    ovn.kubernetes.io/logical_switch: vpc3-subnet
+  namespace: vpc3
+  name: vpc3-busybox04
+spec:
+  containers:
+    - name: busybox
+      image: registry.yealinkops.com/common/base:centos7.6
+      command:
+        - sleep
+        - "8640000"
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
