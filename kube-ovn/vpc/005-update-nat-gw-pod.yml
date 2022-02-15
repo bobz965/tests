@@ -1,0 +1,29 @@
+kind: VpcNatGateway
+apiVersion: kubeovn.io/v1
+metadata:
+  name: gw1
+spec:
+  vpc: vpc1
+  subnet: vpc1-subnet1
+  lanIp: 192.168.0.10
+  eips:
+    - eipCIDR: 172.20.10.200/24
+      gateway: 172.20.10.1
+    - eipCIDR: 172.20.10.201/24
+      gateway: 172.20.10.1
+    - eipCIDR: 172.20.10.202/24
+      gateway: 172.20.10.1
+    - eipCIDR: 172.20.10.203/24
+      gateway: 172.20.10.1
+  snatRules:
+    - eip: 172.20.10.200
+      internalCIDR: 192.168.0.0/24
+  floatingIpRules:
+    - eip: 172.20.10.201
+      internalIp: 192.168.0.11
+  dnatRules:
+    - eip: 172.20.10.202
+      externalPort: '8888'
+      protocol: tcp
+      internalIp: 192.168.0.12
+      internalPort: '80'

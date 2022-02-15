@@ -1,9 +1,9 @@
 kind: ConfigMap
 apiVersion: v1
 data:
-  image: registry.yealinkops.com/third_party/kolla/kube-ovn-vpc-nat-gateway:v1.9.0-x86-yl-2
+  image: registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.0.50
   enable-vpc-nat-gw: "true"
-  nic: eth1
+  nic: eth3
 metadata:
   name: ovn-vpc-nat-gw-config
   namespace: kube-system

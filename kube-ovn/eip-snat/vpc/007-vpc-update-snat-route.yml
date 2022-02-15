@@ -1,9 +1,0 @@
-kind: Vpc
-apiVersion: kubeovn.io/v1
-metadata:
-  name: test-vpc-1
-spec:
-  staticRoutes:
-    - cidr: 0.0.0.0/0
-      nextHopIP: 192.168.11.254
-      policy: policyDst
