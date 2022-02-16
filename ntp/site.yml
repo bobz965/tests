@@ -1,0 +1,22 @@
+- hosts: all
+  roles:
+    - role: linuxhq.chrony
+      chrony_commands:
+        allow:
+          - 10.0.0.0/8
+          - 172.16.0.0/12
+          - 192.168.0.0/16
+        hwtimestamp: '*'
+        keyfile: /etc/chrony.keys
+        log: 'measurements statistics tracking'
+        driftfile: /var/lib/chrony/drift
+        logdir: /var/log/chrony
+        makestep: '1.0 3'
+        minsources: 2
+        rtcsync: True
+        server:
+          - ntp1.aliyun.com iburst
+          - ntp2.aliyun.com iburst
+          - ntp3.aliyun.com iburst
+          - ntp4.aliyun.com iburst
+      chrony_sysconfig: '-F 1'

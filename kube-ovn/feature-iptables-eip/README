@@ -55,6 +55,19 @@ spec:
 
 ```
 
+```yaml
+
+kind: Vpc
+apiVersion: kubeovn.io/v1
+metadata:
+  name: test-vpc-1
+spec:
+  staticRoutes:
+    - cidr: 0.0.0.0/0
+      nextHopIP: 10.0.1.254     # Should be the same as the 'lanIp' for vpc gateway
+      policy: policyDst
+
+```
 
 
 变更
@@ -64,6 +77,12 @@ spec:
 - 支持 eips floatingIpRules dnatRules crd 单条记录维护
 - 支持动态分配eip
 - 支持 eips floatingIpRules dnatRules crd gc
+
+
+缺点: 
+
+eips floatingIpRules dnatRules crd name 必须都是固定的，目前是基于名字进行iptables记录清理
+
 
 
 

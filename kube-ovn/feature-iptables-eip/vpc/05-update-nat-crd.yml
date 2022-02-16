@@ -8,13 +8,13 @@ spec:
   lanIp: 192.168.0.10
   eips:
     - eipCIDR: 172.20.10.200/24
-      gateway: 172.20.10.1
+      gateway: 172.20.10.2
     - eipCIDR: 172.20.10.201/24
-      gateway: 172.20.10.1
+      gateway: 172.20.10.2
     - eipCIDR: 172.20.10.202/24
-      gateway: 172.20.10.1
+      gateway: 172.20.10.2
     - eipCIDR: 172.20.10.203/24
-      gateway: 172.20.10.1
+      gateway: 172.20.10.2
   snatRules:
     - eip: 172.20.10.200
       internalCIDR: 192.168.0.0/24

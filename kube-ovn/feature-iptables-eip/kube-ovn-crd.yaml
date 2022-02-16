@@ -420,6 +420,73 @@ spec:
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  name: virtual-ips.kubeovn.io
+spec:
+  group: kubeovn.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      additionalPrinterColumns:
+      - name: Subnet
+        type: string
+        jsonPath: .spec.subnet
+      - name: V4IP
+        type: string
+        jsonPath: .spec.v4IpAddress
+      - name: Mac
+        type: string
+        jsonPath: .spec.macAddress
+      - name: V6IP
+        type: string
+        jsonPath: .spec.v6IpAddress
+      - name: PV4IP
+        type: string
+        jsonPath: .spec.parentV4Ip
+      - name: PMac
+        type: string
+        jsonPath: .spec.ParentMac
+      - name: PV6IP
+        type: string
+        jsonPath: .spec.parentV6Ip
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                namespace:
+                  type: string
+                subnet:
+                  type: string
+                attachSubnets:
+                  type: array
+                  items:
+                    type: string
+                v4IpAddress:
+                  type: string
+                macAddress:
+                  type: string
+                v6IpAddress:
+                  type: string
+                parentV4Ip:
+                  type: string
+                parentMac:
+                  type: string
+                parentV6Ip:
+                  type: string
+  scope: Cluster
+  names:
+    plural: virtual-ips
+    singular: virtual-ip
+    kind: VirtualIP
+    shortNames:
+      - virtual-ip
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
   name: subnets.kubeovn.io
 spec:
   group: kubeovn.io

@@ -33,6 +33,7 @@ rules:
       - subnets
       - subnets/status
       - ips
+      - virtual-ips
       - vlans
       - provider-networks
       - provider-networks/status

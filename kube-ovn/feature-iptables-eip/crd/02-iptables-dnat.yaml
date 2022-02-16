@@ -1,8 +1,11 @@
 kind: IptablesDnatRule
 apiVersion: kubeovn.io/v1
 metadata:
-  name: gw4
+  name: gw1-172.20.10.211-8888-10.0.1.10-80-tcp
 spec:
-  vpc: vpc4
-  subnet: vpc4-subnet
-  lanIp: 192.168.4.254
+  natGwDp: gw1
+  eip: 172.20.10.211
+  externalPort: '8888'
+  internalIp: 10.0.1.10
+  internalPort: '80'
+  protocol: tcp

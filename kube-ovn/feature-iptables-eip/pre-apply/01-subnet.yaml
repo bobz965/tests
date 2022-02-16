@@ -6,6 +6,6 @@ spec:
   protocol: IPv4
   provider: ovn-vpc-external-network.kube-system
   cidrBlock: 172.20.10.0/24
-  gateway: 172.20.10.1
+  gateway: 172.20.10.2
   excludeIps:
-  - 172.20.10.1..172.20.10.100
+  - 172.20.10.1..172.20.10.200
