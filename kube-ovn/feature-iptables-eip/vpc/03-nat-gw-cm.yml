@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 data:
-  image: registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.0.50
+  image: registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.0.51
   enable-vpc-nat-gw: "true"
   nic: eth3
 metadata:

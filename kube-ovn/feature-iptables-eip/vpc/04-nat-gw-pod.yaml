@@ -7,7 +7,7 @@ spec:
   subnet: vpc1-subnet1
   lanIp: 192.168.0.10
   eips:
-    - eipCIDR: 172.20.10.0/24
+    - eipCIDR: 172.20.10.200/24
       gateway: 172.20.10.1
   snatRules:
     - eip: 172.20.10.200

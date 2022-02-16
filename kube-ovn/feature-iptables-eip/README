@@ -1,4 +1,72 @@
+# 1. 初始化kube-ovn
+
 ln -s /root/kube-ovn/dist/images/install.sh  install.sh
 bash  install.sh 
+
+# 2. 如何使用新的vpc nat gw pod
+
+原生使用方式：
+
+ref: https://github.com/kubeovn/kube-ovn/blob/master/docs/vpc.md
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ovn-vpc-nat-gw-config
+  namespace: kube-system
+data:
+  image: 'kubeovn/vpc-nat-gateway:v1.9.0'  # Docker image for vpc nat gateway
+  enable-vpc-nat-gw: true                  # 'true' for enable, 'false' for disable
+  nic: eth1                                # The nic that connect to underlay network, use as the 'master' for macvlan
+
+
+```
+
+```yaml
+kind: VpcNatGateway
+apiVersion: kubeovn.io/v1
+metadata:
+  name: ngw
+spec:
+  vpc: test-vpc-1                  # Specifies which VPC the gateway belongs to
+  subnet: sn                       # Subnet in VPC
+  lanIp: 10.0.1.254                # Internal IP for nat gateway pod, IP should be within the range of the subnet
+  eips:                            # Underlay IPs assigned to the gateway
+    - eipCIDR: 192.168.0.111/24
+      gateway: 192.168.0.254
+    - eipCIDR: 192.168.0.112/24
+      gateway: 192.168.0.254
+  floatingIpRules:
+    - eip: 192.168.0.111
+      internalIp: 10.0.1.5
+  dnatRules:
+    - eip: 192.168.0.112
+      externalPort: '8888'
+      protocol: tcp
+      internalIp: 10.0.1.10
+      internalPort: '80'
+  snatRules:
+    - eip: 192.168.0.112
+      internalCIDR: 10.0.1.0/24
+  selector:                        # NodeSelector for vpc-nat-gw pod, the item of array should be string type with key:value format
+    - "kubernetes.io/hostname: kube-ovn-worker" # 支持固定到某个worker 可以分散编排不同的vpc 但存在单点问题 编排+监控 及时告警
+    - "kubernetes.io/os: linux"
+
+```
+
+
+
+变更
+
+- 不再自动化（原有代码屏蔽）基于multus macvlan subnet，而是先手动创建该子网，然后仍像原生设计一样应用nat gw pod config map去找已经创建好的multus macvlan subnet
+- 支持 VpcNatGateway 模板维护nat资源， 除了 snatRules， eips floatingIpRules dnatRules 都会创建单条的crd资源
+- 支持 eips floatingIpRules dnatRules crd 单条记录维护
+- 支持动态分配eip
+- 支持 eips floatingIpRules dnatRules crd gc
+
+
+
+## 2.1 
 
 
