@@ -1,0 +1,10 @@
+apiVersion: kubeovn.io/v1
+kind: VirtualIP
+metadata:
+  name: eip02
+  labels:
+    ovn-default: ""
+    ovn.kubernetes.io/subnet: ovn-vpc-external-network
+spec:
+  namespace: kube-system
+  subnet: ovn-vpc-external-network
