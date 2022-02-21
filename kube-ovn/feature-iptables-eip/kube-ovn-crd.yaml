@@ -103,6 +103,9 @@ spec:
   scope: Cluster
   versions:
     - additionalPrinterColumns:
+        - jsonPath: .spec.evip
+          name: evip
+          type: string
         - jsonPath: .spec.natGwDp
           name: NatGwDp
           type: string
@@ -122,6 +125,8 @@ spec:
             spec:
               type: object
               properties:
+                evip:
+                  type: string
                 natGwDp:
                   type: string
                 eipCIDR:
@@ -149,6 +154,9 @@ spec:
   scope: Cluster
   versions:
     - additionalPrinterColumns:
+        - jsonPath: .spec.evip
+          name: evip
+          type: string
         - jsonPath: .spec.natGwDp
           name: NatGwDp
           type: string
@@ -168,6 +176,8 @@ spec:
             spec:
               type: object
               properties:
+                evip:
+                  type: string
                 natGwDp:
                   type: string
                 eip:
@@ -195,6 +205,9 @@ spec:
   scope: Cluster
   versions:
     - additionalPrinterColumns:
+        - jsonPath: .spec.evip
+          name: evip
+          type: string
         - jsonPath: .spec.natGwDp
           name: NatGwDp
           type: string
@@ -223,6 +236,8 @@ spec:
             spec:
               type: object
               properties:
+                evip:
+                  type: string
                 natGwDp:
                   type: string
                 eip:

@@ -1,10 +1,10 @@
 kind: IptablesDnatRule
 apiVersion: kubeovn.io/v1
 metadata:
-  name: gw1-172.20.10.211-8888-10.0.1.10-80-tcp
+  name: dnat01
 spec:
   natGwDp: gw1
-  eip: 172.20.10.211
+  evip: evip02
   externalPort: '8888'
   internalIp: 10.0.1.10
   internalPort: '80'

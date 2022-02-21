@@ -1,0 +1,5 @@
+https://github.com/kubeovn/kube-ovn/blob/master/docs/install.md
+
+wget https://raw.githubusercontent.com/kubeovn/kube-ovn/release-1.9/dist/images/cleanup.sh
+bash cleanup.sh
+
