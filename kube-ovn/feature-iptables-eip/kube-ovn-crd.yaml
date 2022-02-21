@@ -39,7 +39,7 @@ spec:
                   items:
                     type: object
                     properties:
-                      eip:
+                      evip:
                         type: string
                       externalPort:
                         type: string
@@ -54,7 +54,7 @@ spec:
                   items:
                     type: object
                     properties:
-                      eipCIDR:
+                      evip:
                         type: string
                       gateway:
                         type: string
@@ -63,7 +63,7 @@ spec:
                   items:
                     type: object
                     properties:
-                      eip:
+                      evip:
                         type: string
                       internalIp:
                         type: string
@@ -74,7 +74,7 @@ spec:
                   items:
                     type: object
                     properties:
-                      eip:
+                      evip:
                         type: string
                       internalCIDR:
                         type: string
