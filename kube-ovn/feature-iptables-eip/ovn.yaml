@@ -44,6 +44,10 @@ rules:
       - iptables-eips
       - iptables-fip-rules
       - iptables-dnat-rules
+      - iptables-eips/status
+      - iptables-fip-rules/status
+      - iptables-dnat-rules/status
+      - virtual-ips/status
     verbs:
       - "*"
   - apiGroups:
