@@ -4,5 +4,5 @@ metadata:
   name: fip01
 spec:
   natGwDp: gw1
-  evip: evip01
+  eip: eip01
   internalIp: 192.168.0.11
