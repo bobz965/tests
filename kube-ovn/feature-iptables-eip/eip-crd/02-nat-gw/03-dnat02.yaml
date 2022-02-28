@@ -4,8 +4,8 @@ metadata:
   name: dnat02
 spec:
   natGwDp: gw1
-  eip: eip02
+  eip: eipd02
   externalPort: '8888'
-  internalIp: 192.168.0.2
+  internalIp: 192.168.0.3
   internalPort: '80'
   protocol: tcp

@@ -4,5 +4,5 @@ metadata:
   name: snat01
 spec:
   natGwDp: gw1
-  eip: snat-eip01
+  eip: eips01
   internalCIDR: 192.168.0.0/24
