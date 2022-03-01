@@ -7,5 +7,5 @@ spec:
   - vpc1
   staticRoutes:
   - cidr: 0.0.0.0/0
-    nextHopIP: 192.168.0.10
+    nextHopIP: 192.168.0.254
     policy: policyDst
