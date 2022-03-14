@@ -2,9 +2,6 @@ apiVersion: kubeovn.io/v1
 kind: VirtualIP
 metadata:
   name: vips01
-  labels:
-    ovn-default: ""
-    ovn.kubernetes.io/subnet: ovn-vpc-external-network
 spec:
-  namespace: kube-system
+  namespace: vpc1
   subnet: ovn-vpc-external-network

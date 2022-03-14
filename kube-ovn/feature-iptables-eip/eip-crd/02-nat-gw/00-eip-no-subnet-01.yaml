@@ -1,0 +1,8 @@
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip-no-subnet-01
+spec:
+  natGwDp: gw1
+  vip: vip-no-subnet-01
+  gateway: 172.20.10.2

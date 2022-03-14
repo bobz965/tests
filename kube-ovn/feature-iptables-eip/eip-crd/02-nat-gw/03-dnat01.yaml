@@ -6,6 +6,6 @@ spec:
   natGwDp: gw1
   eip: eipd01
   externalPort: '8888'
-  internalIp: 192.168.0.2
+  internalIp: 192.168.0.5
   internalPort: '80'
   protocol: tcp
