@@ -4,5 +4,3 @@ metadata:
   name: eipf02
 spec:
   natGwDp: gw1
-  vip: vipf02
-  gateway: 172.20.10.2

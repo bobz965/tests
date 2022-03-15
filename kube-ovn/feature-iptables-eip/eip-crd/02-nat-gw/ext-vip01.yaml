@@ -1,7 +1,0 @@
-apiVersion: kubeovn.io/v1
-kind: VirtualIP
-metadata:
-  name: evip01
-spec:
-  namespace: vpc1
-  subnet: ovn-vpc-external-network

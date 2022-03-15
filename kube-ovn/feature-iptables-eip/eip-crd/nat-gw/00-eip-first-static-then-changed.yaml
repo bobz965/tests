@@ -1,8 +1,7 @@
 kind: IptablesEIP
 apiVersion: kubeovn.io/v1
 metadata:
-  name: eipf01
+  name: eip-first-static
 spec:
   natGwDp: gw1
-  vip: vipf01
-  gateway: 172.20.10.2
+  v4ip: 172.20.10.222

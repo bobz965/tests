@@ -124,20 +124,17 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
-      - jsonPath: .spec.vip
-        name: vip
-        type: string
       - jsonPath: .spec.v4ip
         name: v4ip
         type: string
       - jsonPath: .spec.v6ip
         name: v6ip
         type: string
+      - jsonPath: .spec.macAddress
+        name: Mac
+        type: string
       - jsonPath: .spec.natGwDp
         name: NatGwDp
-        type: string
-      - jsonPath: .spec.gateway
-        name: Gateway
         type: string
       - jsonPath: .spec.redo
         name: Redo
@@ -145,6 +142,9 @@ spec:
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.ip
+        name: IP
+        type: string
       schema:
         openAPIV3Schema:
           type: object
@@ -154,6 +154,8 @@ spec:
               properties:
                 ready:
                   type: boolean
+                ip:
+                  type: string
                 conditions:
                   type: array
                   items:
@@ -174,17 +176,15 @@ spec:
             spec:
               type: object
               properties:
-                vip:
-                  type: string
                 v4ip:
                   type: string
                 v6ip:
                   type: string
+                macAddress:
+                  type: string
                 natGwDp:
                   type: string
                 redo:
-                  type: string
-                gateway:
                   type: string
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -211,15 +211,6 @@ spec:
       - jsonPath: .spec.eip
         name: eip
         type: string
-      - jsonPath: .spec.v4ip
-        name: v4ip
-        type: string
-      - jsonPath: .spec.v6ip
-        name: v6ip
-        type: string
-      - jsonPath: .spec.natGwDp
-        name: NatGwDp
-        type: string
       - jsonPath: .spec.internalIp
         name: InternalIp
         type: string
@@ -229,6 +220,15 @@ spec:
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.v4ip
+        name: V4ip
+        type: string
+      - jsonPath: .status.v6ip
+        name: V6ip
+        type: string
+      - jsonPath: .status.natGwDp
+        name: NatGwDp
+        type: string
       schema:
         openAPIV3Schema:
           type: object
@@ -238,6 +238,12 @@ spec:
               properties:
                 ready:
                   type: boolean
+                v4ip:
+                  type: string
+                v6ip:
+                  type: string
+                natGwDp:
+                  type: string
                 conditions:
                   type: array
                   items:
@@ -259,12 +265,6 @@ spec:
               type: object
               properties:
                 eip:
-                  type: string
-                v4ip:
-                  type: string
-                v6ip:
-                  type: string
-                natGwDp:
                   type: string
                 redo:
                   type: string
@@ -295,15 +295,6 @@ spec:
       - jsonPath: .spec.eip
         name: eip
         type: string
-      - jsonPath: .spec.v4ip
-        name: v4ip
-        type: string
-      - jsonPath: .spec.v6ip
-        name: v6ip
-        type: string
-      - jsonPath: .spec.natGwDp
-        name: NatGwDp
-        type: string
       - jsonPath: .spec.externalPort
         name: ExternalPort
         type: string
@@ -322,6 +313,15 @@ spec:
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.v4ip
+        name: V4ip
+        type: string
+      - jsonPath: .status.v6ip
+        name: V6ip
+        type: string
+      - jsonPath: .status.natGwDp
+        name: NatGwDp
+        type: string
       schema:
         openAPIV3Schema:
           type: object
@@ -331,6 +331,12 @@ spec:
               properties:
                 ready:
                   type: boolean
+                v4ip:
+                  type: string
+                v6ip:
+                  type: string
+                natGwDp:
+                  type: string
                 conditions:
                   type: array
                   items:
@@ -352,12 +358,6 @@ spec:
               type: object
               properties:
                 eip:
-                  type: string
-                v4ip:
-                  type: string
-                v6ip:
-                  type: string
-                natGwDp:
                   type: string
                 redo:
                   type: string
@@ -394,15 +394,6 @@ spec:
       - jsonPath: .spec.eip
         name: eip
         type: string
-      - jsonPath: .spec.v4ip
-        name: v4ip
-        type: string
-      - jsonPath: .spec.v6ip
-        name: v6ip
-        type: string
-      - jsonPath: .spec.natGwDp
-        name: NatGwDp
-        type: string
       - jsonPath: .spec.internalCIDR
         name: InternalIp
         type: string
@@ -412,6 +403,15 @@ spec:
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.v4ip
+        name: V4ip
+        type: string
+      - jsonPath: .status.v6ip
+        name: V6ip
+        type: string
+      - jsonPath: .status.natGwDp
+        name: NatGwDp
+        type: string
       schema:
         openAPIV3Schema:
           type: object
@@ -421,6 +421,12 @@ spec:
               properties:
                 ready:
                   type: boolean
+                v4ip:
+                  type: string
+                v6ip:
+                  type: string
+                natGwDp:
+                  type: string
                 conditions:
                   type: array
                   items:
@@ -442,12 +448,6 @@ spec:
               type: object
               properties:
                 eip:
-                  type: string
-                v4ip:
-                  type: string
-                v6ip:
-                  type: string
-                natGwDp:
                   type: string
                 redo:
                   type: string
@@ -654,25 +654,22 @@ spec:
         jsonPath: .spec.subnet
       - name: V4IP
         type: string
-        jsonPath: .spec.v4IpAddress
+        jsonPath: .spec.v4ip
       - name: Mac
         type: string
         jsonPath: .spec.macAddress
       - name: V6IP
         type: string
-        jsonPath: .spec.v6IpAddress
+        jsonPath: .spec.v6ip
       - name: PV4IP
         type: string
-        jsonPath: .spec.parentV4Ip
+        jsonPath: .spec.parentV4ip
       - name: PMac
         type: string
         jsonPath: .spec.ParentMac
       - name: PV6IP
         type: string
-        jsonPath: .spec.parentV6Ip
-      - name: Usings
-        jsonPath: .status.usings
-        type: number
+        jsonPath: .spec.parentV6ip
       schema:
         openAPIV3Schema:
           type: object
@@ -680,8 +677,6 @@ spec:
             status:
               type: object
               properties:
-                usings:
-                  type: number
                 conditions:
                   type: array
                   items:
@@ -710,17 +705,17 @@ spec:
                   type: array
                   items:
                     type: string
-                v4IpAddress:
+                v4ip:
                   type: string
                 macAddress:
                   type: string
-                v6IpAddress:
+                v6ip:
                   type: string
-                parentV4Ip:
+                parentV4ip:
                   type: string
                 parentMac:
                   type: string
-                parentV6Ip:
+                parentV6ip:
                   type: string
 ---
 apiVersion: apiextensions.k8s.io/v1

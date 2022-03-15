@@ -1,8 +1,7 @@
 kind: IptablesFIPRule
 apiVersion: kubeovn.io/v1
 metadata:
-  name: fip-no-subnet-01
+  name: fip-eip-static
 spec:
-  natGwDp: gw1
-  eip: eip-no-subnet-01
+  eip: eip-static-01 
   internalIp: 192.168.0.7

@@ -1,4 +1,6 @@
 apiVersion: kubeovn.io/v1
 kind: VirtualIP
 metadata:
-  name: vip-no-subnet-01
+  name: vipd02
+spec:
+  subnet: vpc1-subnet1
