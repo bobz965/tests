@@ -3,8 +3,8 @@ set -euo pipefail
 
 # create eip
 
-kubectl apply -f 00-eipd01.yml 
-kubectl apply -f 00-eipd02.yml 
+kubectl apply -f 00-eipf01.yml
+kubectl apply -f 00-eipf02.yml 
 kubectl apply -f 00-eip-first-static.yaml
 #  show
 sleep 5

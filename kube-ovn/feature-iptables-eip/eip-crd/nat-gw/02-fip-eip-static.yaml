@@ -3,5 +3,5 @@ apiVersion: kubeovn.io/v1
 metadata:
   name: fip-eip-static
 spec:
-  eip: eip-static-01 
+  eip: eip-first-static
   internalIp: 192.168.0.7
