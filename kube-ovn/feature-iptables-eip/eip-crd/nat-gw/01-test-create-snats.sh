@@ -3,32 +3,31 @@ set -euo pipefail
 
 # create eip
 
-kubectl apply -f 00-eipd01.yml
-kubectl apply -f 00-eipd02.yml 
+kubectl apply -f 00-eips01.yml
+sleep 2
+kubectl apply -f 00-eips02.yml
+sleep 2
 kubectl apply -f 00-eip-first-static.yaml
 #  show
-sleep 5
+sleep 2
 
 #  show
 kubectl get eip
 
 # create nat
 
-kubectl apply -f 03-dnat01.yaml
-kubectl apply -f 03-dnat02.yaml
+kubectl apply -f 01-snat01.yaml
+sleep 2
+kubectl apply -f 01-snat02.yaml
+sleep 2
 
-
-sleep 5
-kubectl get dnat
-
-
+kubectl get snat
 
 # fip change eip
-
-kubectl apply -f 03-dnat01-change-eip.yaml
+kubectl apply -f 01-snat01-change-eip.yaml
 
 sleep 5
-kubectl get dnat
+kubectl get snat
 
 
 
@@ -36,7 +35,8 @@ kubectl get dnat
 kubectl apply -f 00-eip-first-static-then-changed.yaml
 sleep 5
 
-
 #  show
 kubectl get eip
-kubectl get dnat
+kubectl get snat
+
+

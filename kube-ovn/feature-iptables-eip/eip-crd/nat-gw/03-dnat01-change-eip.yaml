@@ -1,10 +1,10 @@
 kind: IptablesDnatRule
 apiVersion: kubeovn.io/v1
 metadata:
-  name: dnat02
+  name: dnat01
 spec:
-  eip: eipd02
+  eip: eip-first-static
   externalPort: '8888'
-  internalIp: 192.168.0.6
+  internalIp: 192.168.0.5
   internalPort: '80'
   protocol: tcp
