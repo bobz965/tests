@@ -3,6 +3,8 @@
 
 kubectl delete -f 01-snat01.yaml
 kubectl delete -f 01-snat02.yaml
+kubectl delete -f 01-static-snat01.yaml
+kubectl delete -f 01-static-snat02.yaml
 
 # delete eip
 kubectl delete -f 00-eip-first-static-then-changed.yaml
@@ -13,6 +15,9 @@ kubectl delete -f 00-eips02.yml
 sleep 5
 
 #  show
-kubectl get eip
+echo "after delete eip, check if eip label and nat is cleaned"
+kubectl get eip --show-labels | grep -v snat 
+
+sleep 10
 kubectl get snat
 
