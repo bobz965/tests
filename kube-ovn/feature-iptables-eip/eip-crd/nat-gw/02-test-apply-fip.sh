@@ -10,8 +10,8 @@ kubectl apply -f 00-eip-first-static.yaml
 sleep 5
 
 #  show
-kubectl get eip
-kubectl get fip
+kubectl get eip --show-labels
+kubectl get fip --show-labels
 
 
 # create nat
@@ -21,16 +21,16 @@ kubectl apply -f 02-fip-eip-static.yaml
 
 
 sleep 5
-kubectl get fip
+kubectl get fip --show-labels
 
 
 
-# fip change eip
+# fip change eip --show-labels
 
 kubectl apply -f 02-fip-rule01-change-eip.yaml
 
 sleep 5
-kubectl get fip
+kubectl get fip --show-labels
 
 
 
@@ -38,8 +38,8 @@ kubectl get fip
 kubectl apply -f 00-eip-first-static-then-changed.yaml
 sleep 5
 
-kubectl get fip
+kubectl get fip --show-labels
 
 #  show
-kubectl get eip
-kubectl get fip
+kubectl get eip --show-labels
+kubectl get fip --show-labels
