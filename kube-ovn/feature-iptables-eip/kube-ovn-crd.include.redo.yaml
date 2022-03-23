@@ -124,21 +124,27 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
-      - jsonPath: .status.ip
-        name: IP
+      - jsonPath: .spec.v4ip
+        name: v4ip
+        type: string
+      - jsonPath: .spec.v6ip
+        name: v6ip
         type: string
       - jsonPath: .spec.macAddress
         name: Mac
         type: string
-      - jsonPath: .status.nat
-        name: Nat
-        type: string
       - jsonPath: .spec.natGwDp
         name: NatGwDp
+        type: string
+      - jsonPath: .status.redo
+        name: Redo
         type: string
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.ip
+        name: IP
+        type: string
       schema:
         openAPIV3Schema:
           type: object
@@ -149,8 +155,6 @@ spec:
                 ready:
                   type: boolean
                 ip:
-                  type: string
-                nat:
                   type: string
                 redo:
                   type: string
@@ -205,20 +209,23 @@ spec:
         status: {}
       additionalPrinterColumns:
       - jsonPath: .spec.eip
-        name: Eip
-        type: string
-      - jsonPath: .status.v4ip
-        name: V4ip
+        name: eip
         type: string
       - jsonPath: .spec.internalIp
         name: InternalIp
         type: string
-      - jsonPath: .status.v6ip
-        name: V6ip
+      - jsonPath: .status.redo
+        name: Redo
         type: string
       - jsonPath: .status.ready
         name: Ready
         type: boolean
+      - jsonPath: .status.v4ip
+        name: V4ip
+        type: string
+      - jsonPath: .status.v6ip
+        name: V6ip
+        type: string
       - jsonPath: .status.natGwDp
         name: NatGwDp
         type: string
@@ -286,32 +293,35 @@ spec:
         status: {}
       additionalPrinterColumns:
       - jsonPath: .spec.eip
-        name: Eip
+        name: eip
+        type: string
+      - jsonPath: .spec.externalPort
+        name: ExternalPort
         type: string
       - jsonPath: .spec.protocol
         name: Protocol
         type: string
+      - jsonPath: .spec.internalIp
+        name: InternalIp
+        type: string
+      - jsonPath: .spec.internalPort
+        name: InternalPort
+        type: string
+      - jsonPath: .status.redo
+        name: Redo
+        type: string
+      - jsonPath: .status.ready
+        name: Ready
+        type: boolean
       - jsonPath: .status.v4ip
         name: V4ip
         type: string
       - jsonPath: .status.v6ip
         name: V6ip
         type: string
-      - jsonPath: .spec.internalIp
-        name: InternalIp
-        type: string
-      - jsonPath: .spec.externalPort
-        name: ExternalPort
-        type: string
-      - jsonPath: .spec.internalPort
-        name: InternalPort
-        type: string
       - jsonPath: .status.natGwDp
         name: NatGwDp
         type: string
-      - jsonPath: .status.ready
-        name: Ready
-        type: boolean
       schema:
         openAPIV3Schema:
           type: object
@@ -382,23 +392,26 @@ spec:
         status: {}
       additionalPrinterColumns:
       - jsonPath: .spec.eip
-        name: EIP
+        name: eip
         type: string
+      - jsonPath: .spec.internalCIDR
+        name: InternalIp
+        type: string
+      - jsonPath: .status.redo
+        name: Redo
+        type: string
+      - jsonPath: .status.ready
+        name: Ready
+        type: boolean
       - jsonPath: .status.v4ip
         name: V4ip
         type: string
       - jsonPath: .status.v6ip
         name: V6ip
         type: string
-      - jsonPath: .spec.internalCIDR
-        name: InternalCIDR
-        type: string
       - jsonPath: .status.natGwDp
         name: NatGwDp
         type: string
-      - jsonPath: .status.ready
-        name: Ready
-        type: boolean
       schema:
         openAPIV3Schema:
           type: object
