@@ -1,5 +1,5 @@
 apiVersion: kubeovn.io/v1
-kind: VirtualIP
+kind: Vip
 metadata:
   name: vipd02
 spec:

@@ -9,6 +9,7 @@ kubectl get fip --show-labels
 
 # clean nat
 kubectl delete -f 02-fip-rule01.yaml
+kubectl delete -f 02-fip-rule02.yaml
 sleep 2
 kubectl delete -f 02-fip-eip-static.yaml
 sleep 2

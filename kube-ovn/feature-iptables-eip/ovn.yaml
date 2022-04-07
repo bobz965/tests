@@ -33,7 +33,8 @@ rules:
       - subnets
       - subnets/status
       - ips
-      - virtual-ips
+      - vips
+      - vips/status
       - vlans
       - provider-networks
       - provider-networks/status
@@ -49,7 +50,6 @@ rules:
       - iptables-fip-rules/status
       - iptables-dnat-rules/status
       - iptables-snat-rules/status
-      - virtual-ips/status
     verbs:
       - "*"
   - apiGroups:
