@@ -1,0 +1,2 @@
+在使用vpc nat pod之前 提前准备好macvlan的multus生命，以及网络
+

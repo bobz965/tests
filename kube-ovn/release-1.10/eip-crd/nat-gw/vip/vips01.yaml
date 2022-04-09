@@ -1,0 +1,8 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vips01
+  namespace: vpc1
+spec:
+  subnet: vpc1-subnet1
+  v4ip: "192.168.0.100" 

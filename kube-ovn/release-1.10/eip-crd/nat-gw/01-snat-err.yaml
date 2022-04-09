@@ -1,0 +1,7 @@
+kind: IptablesSnatRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: snat-err
+spec:
+  eip: eip-err
+  internalCIDR: 192.168.0.40/24

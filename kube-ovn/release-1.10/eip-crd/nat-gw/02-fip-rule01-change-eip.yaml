@@ -1,0 +1,7 @@
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip01
+spec:
+  eip: eipf02
+  internalIp: 192.168.0.3

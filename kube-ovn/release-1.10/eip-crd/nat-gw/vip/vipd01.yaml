@@ -1,0 +1,7 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vipd01
+  namespace: vpc1
+spec:
+  subnet: vpc1-subnet1
