@@ -1,0 +1,4 @@
+FROM kubeovn/vpc-nat-gateway:v1.10.0
+
+WORKDIR /kube-ovn
+COPY nat-gateway.sh /kube-ovn/

@@ -1,0 +1,6 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vip-ovn-default-01
+spec:
+  subnet: ovn-default

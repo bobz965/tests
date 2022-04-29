@@ -2534,6 +2534,7 @@ spec:
           - --alsologtostderr=true
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --v=5 
           env:
             - name: ENABLE_SSL
               value: "$ENABLE_SSL"
