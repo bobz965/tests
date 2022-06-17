@@ -3,6 +3,6 @@ ARG GOPROXY
 ENV GOPROXY $GOPROXY
 RUN GOPROXY=https://goproxy.cn
 WORKDIR /kube-ovn
-COPY go.sum go.sum
-COPY go.mod go.mod
+COPY kube-ovn/go.sum go.sum
+COPY kube-ovn/go.mod go.mod
 RUN go mod download -x

@@ -2,7 +2,7 @@ FROM registry.yealinkops.com/third_party/kolla/l1-kube-ovn-base:v0.0.50 as l1-ov
 ARG GOPROXY
 ENV GOPROXY $GOPROXY
 WORKDIR /kube-ovn
-COPY . .
+COPY kube-ovn/* .
 RUN cd cmd/ && CGO_ENABLED=0 GOOS=linux go build \
     -ldflags \
     "-X \"k8s.io/client-go/pkg/version.gitCommit=`git rev-parse HEAD`\" \
