@@ -1,0 +1,10 @@
+FROM ubuntu:22.04
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update; echo 'ok' && apt-get install hostname \
+        ethtool iproute2 ncat \
+        logrotate -y --no-install-recommends && \
+        rm -rf /var/lib/apt/lists/* && \
+        cd /usr/sbin && \
+        ln -sf /usr/sbin/iptables-legacy iptables && \
+        ln -sf /usr/sbin/ip6tables-legacy ip6tables && \
+        rm -rf /etc/localtime

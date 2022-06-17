@@ -1,0 +1,4 @@
+FROM registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.1.70
+#RUN  mv /kube-ovn/nat-gateway.sh /kube-ovn/nat-gateway.sh.bak
+#COPY dist/images/vpcnatgateway/nat-gateway.sh /kube-ovn/nat-gateway.sh
+COPY yealink/nat-gateway.sh /kube-ovn/nat-gateway.sh

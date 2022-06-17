@@ -1,0 +1,22 @@
+README: iptables-eip CRD 代码生成过程
+yamls/ovn-external-gw-dvr.yaml： test ovs dvr fip
+
+###### 如下 构建的脚本都置于项目下
+001-build-ubuntu20-base.sh： 构建基础镜像，注意根据官方镜像变更进行调整，软链接到项目下即可
+002-build-l1-kube-ovn-base.sh： 构建kube-ovn-base  不用每次都下载go packages
+003-build-l1-kube-ovn-controller.sh： 构建kube-ovn-controller
+BaseDockerfile： 001-build 用
+l1-kube-ovn-controller-Dockerfile： 003-build 用
+release.rc : 用于修改发布版本
+vpc-nat-gateway-docker-file： nat gw pod + debug
+
+###### 如上 构建的脚本都置于项目下
+
+
+
+
+
+ykcust-install.sh: 安装脚本  对应于dist/images/install.sh
+
+
+nat-gateway.sh: 对应于dist/images/vpcnatgateway/nat-gateway.sh
