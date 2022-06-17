@@ -8,8 +8,8 @@ RUN cd cmd/ && CGO_ENABLED=0 GOOS=linux go build \
     "-X \"k8s.io/client-go/pkg/version.gitCommit=`git rev-parse HEAD`\" \
     -X \"k8s.io/client-go/pkg/version.buildDate=`date -u +'%Y-%m-%dT%H:%M:%SZ'`\"" -o kube-ovn-controller .
 
-FROM registry.yealinkops.com/third_party/kolla/kubeovn/kube-ovn:v1.9.0
+FROM registry.yealinkops.com/third_party/kolla/kubeovn/kube-ovn:v1.11.0
 WORKDIR /kube-ovn
 COPY --from=l1-ovn-builder /kube-ovn/cmd/kube-ovn-controller /kube-ovn/
 RUN chmod +x /kube-ovn/*
-ENTRYPOINT ["/kube-ovn/start-controller.sh"]
+#ENTRYPOINT ["/kube-ovn/start-controller.sh"]
