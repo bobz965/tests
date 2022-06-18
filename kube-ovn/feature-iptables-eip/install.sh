@@ -1,1 +1,0 @@
-/root/kube-ovn/dist/images/install.sh
