@@ -41,7 +41,8 @@ spec:
       hostNetwork: true
       containers:
         - name: kube-ovn-controller
-          image: "kubeovn/kube-ovn:v1.11.0"
+          #image: "kubeovn/kube-ovn:v1.11.0"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.203"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
@@ -62,7 +63,6 @@ spec:
           - --enable-external-vpc=true
           - --logtostderr=false
           - --alsologtostderr=true
-          - --inspect-interval=20
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
           env:
