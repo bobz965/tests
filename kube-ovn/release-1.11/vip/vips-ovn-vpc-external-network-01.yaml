@@ -1,0 +1,7 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vips-ovn-vpc-external-network-01
+spec:
+  subnet: ovn-vpc-external-network
+  v4ip: "172.20.10.100" 

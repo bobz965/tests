@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    ovn.kubernetes.io/logical_switch: vpc1-subnet1
-  namespace: vpc1
-  name: vpc-1-busybox04
+    ovn.kubernetes.io/logical_switch: bb1-subnet1
+  namespace: bb1
+  name: vpc-1-busybox01
 spec:
   containers:
     - name: busybox

@@ -1,0 +1,7 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vips-retry-err
+spec:
+  subnet: vips-retry-err
+  v4ip: "192.168.0.100" 

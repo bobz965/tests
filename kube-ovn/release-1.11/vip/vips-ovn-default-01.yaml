@@ -1,0 +1,7 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  name: vips-ovn-default-01
+spec:
+  subnet: ovn-default
+  v4ip: "10.16.0.100" 

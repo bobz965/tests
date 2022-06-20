@@ -1,10 +1,10 @@
 kind: Vpc
 apiVersion: kubeovn.io/v1
 metadata:
-  name: vpc1
+  name: bb1
 spec:
   namespaces:
-  - vpc1
+  - bb1
   staticRoutes:
   - cidr: 0.0.0.0/0
     nextHopIP: 192.168.0.254
