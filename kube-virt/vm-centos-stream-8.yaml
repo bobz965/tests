@@ -1,0 +1,62 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: cjh-centos-stream-8
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: cjh-centos-stream-8
+    spec:
+      domain:
+        devices:
+          disks:
+            - name: sysdisk
+            - name: cloudinitdisk
+        resources:
+          requests:
+            cpu: 4
+            memory: 8Gi
+      volumes:
+        - name: sysdisk
+          dataVolume:
+            name: cjh-centos-stream-8
+        - name: cloudinitdisk
+          cloudInitConfigDrive:
+            userData: "#cloud-config"
+      accessCredentials:
+      - sshPublicKey:
+          source:
+            secret:
+              secretName: ssh-pub-key
+          propagationMethod:
+            configDrive: {}
+  dataVolumeTemplates:
+  - metadata:
+      name: cjh-centos-stream-8
+    spec:
+      pvc:
+        volumeMode: Block
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+      source:
+        pvc:
+          name: centos-stream-8
+          namespace: kube-public
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cjh-centos-stream-8
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 22
+    targetPort: 22
+    protocol: TCP
+  selector:
+    kubevirt.io/domain: cjh-centos-stream-8
