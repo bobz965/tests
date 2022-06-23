@@ -41,8 +41,7 @@ spec:
       hostNetwork: true
       containers:
         - name: kube-ovn-controller
-          #image: "kubeovn/kube-ovn:v1.11.0"
-          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.206"
+          image: "kubeovn/kube-ovn:v1.11.0"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
@@ -465,7 +464,8 @@ spec:
       hostNetwork: true
       containers:
         - name: kube-ovn-monitor
-          image: "kubeovn/kube-ovn:v1.11.0"
+          #image: "kubeovn/kube-ovn:v1.11.0"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.207"
           imagePullPolicy: IfNotPresent
           command: ["/kube-ovn/start-ovn-monitor.sh"]
           securityContext:
