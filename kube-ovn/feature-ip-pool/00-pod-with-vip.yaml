@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-ip
+  annotations:
+    ovn.kubernetes.io/vip: vip-dynamic-01
+spec:
+  containers:
+  - name: static-ip
+    image: nginx:alpine

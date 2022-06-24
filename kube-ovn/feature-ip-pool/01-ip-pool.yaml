@@ -1,0 +1,7 @@
+apiVersion: kubeovn.io/v1
+kind: IpPool
+metadata:
+  name: ip-pool-dynamic-01
+spec:
+  subnet: ovn-default
+  capacity: 3
