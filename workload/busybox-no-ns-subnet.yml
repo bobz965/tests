@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox01-no-ns-name
+spec:
+  containers:
+    - name: busybox
+      image: registry.yealinkops.com/common/base:centos7.6
+      command:
+        - sleep
+        - "8640000"
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
