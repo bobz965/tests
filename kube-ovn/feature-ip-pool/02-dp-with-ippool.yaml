@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: starter-backend
+  labels:
+    app: starter-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: starter-backend
+  template:
+    metadata:
+      labels:
+        app: starter-backend
+      annotations:
+        ovn.kubernetes.io/vip_pool: ip-pool-dynamic
+    spec:
+      containers:
+      - name: backend
+        image: nginx:alpine

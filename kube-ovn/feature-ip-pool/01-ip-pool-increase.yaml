@@ -1,6 +1,7 @@
 apiVersion: kubeovn.io/v1
-kind: Vip
+kind: IpPool
 metadata:
-  name: vip-dynamic-01
+  name: ip-pool-dynamic
 spec:
   subnet: bb1-subnet1
+  capacity: 5

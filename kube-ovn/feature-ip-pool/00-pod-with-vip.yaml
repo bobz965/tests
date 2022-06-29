@@ -4,6 +4,8 @@ metadata:
   name: static-ip
   annotations:
     ovn.kubernetes.io/vip: vip-dynamic-01
+  namespace: bb1
+
 spec:
   containers:
   - name: static-ip

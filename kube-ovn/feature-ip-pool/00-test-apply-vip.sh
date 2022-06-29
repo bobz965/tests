@@ -16,8 +16,8 @@ echo "vip v4ip, $ip"
 
 kubectl get vip vip-dynamic-01 -o yaml| grep -A 5 '  labels:'
 
-kubectl get pod -n default static-ip -o wide | grep "$ip"
+kubectl get pod -n bb1 static-ip -o wide | grep "$ip"
 
-kubectl get ip  static-ip.default | grep "$ip"
+kubectl get ip  static-ip.bb1 | grep "$ip"
 
 echo "done"

@@ -42,7 +42,7 @@ spec:
       containers:
         - name: kube-ovn-controller
           #image: "kubeovn/kube-ovn:v1.11.0"
-          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.210"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.232"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
@@ -65,6 +65,7 @@ spec:
           - --alsologtostderr=true
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --v=5
           env:
             - name: ENABLE_SSL
               value: "false"

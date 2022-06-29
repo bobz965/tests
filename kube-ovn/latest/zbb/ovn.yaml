@@ -26,8 +26,8 @@ rules:
       - subnets
       - subnets/status
       - ips
-      - ip-pools
-      - ip-pools/status
+      - ippools
+      - ippools/status
       - vips
       - vips/status
       - vlans

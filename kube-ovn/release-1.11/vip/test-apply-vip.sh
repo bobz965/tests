@@ -3,7 +3,7 @@ set -euo pipefail
 
 # create vip
 echo "show vpc sunbet status before"
-kubectl get subnet vpc1-subnet1 
+kubectl get subnet bb1-subnet1 
 kubectl get subnet ovn-default  
 kubectl get subnet ovn-vpc-external-network
 
@@ -37,6 +37,6 @@ kubectl get vip vips-ovn-vpc-external-network-01 | grep 172.20.10.100
 
 
 echo "show vpc sunbet status before"
-kubectl get subnet vpc1-subnet1 
+kubectl get subnet bb1-subnet1 
 kubectl get subnet ovn-default  
 kubectl get subnet ovn-vpc-external-network
