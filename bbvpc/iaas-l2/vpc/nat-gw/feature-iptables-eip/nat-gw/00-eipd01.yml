@@ -1,0 +1,8 @@
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eipd01
+spec:
+  natGwDp: bbgw01
+  vip: vipd01
+  gateway: 10.5.63.254

@@ -1,0 +1,7 @@
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip-bbvpc-grafana
+spec:
+  eip: eip-bbvpc-grafana
+  internalIp: 192.168.0.70

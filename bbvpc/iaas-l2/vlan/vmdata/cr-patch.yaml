@@ -1,0 +1,7 @@
+rules:
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "create", "update", "list", "put"]
+  - apiGroups: [""]
+    resources: ["services", "services/status", "nodes"]
+    verbs: ["list","get","watch", "update"]

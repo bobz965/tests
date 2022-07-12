@@ -1,0 +1,8 @@
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip02
+spec:
+  natGwDp: bbgw01
+  eip: eipf02
+  internalIp: 192.168.0.4

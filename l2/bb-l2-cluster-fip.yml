@@ -1,0 +1,90 @@
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-eipf01
+spec:
+  natGwDp: gw1
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-eipf02
+spec:
+  natGwDp: gw1
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-eipf03
+spec:
+  natGwDp: gw1
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-eipf01
+spec:
+  natGwDp: gw1
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-eipf02
+spec:
+  natGwDp: gw1
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-eipf03
+spec:
+  natGwDp: gw1
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-fip01
+spec:
+  eip: bb-mst-eipf01
+  internalIp: 192.168.0.21
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-fip02
+spec:
+  eip: bb-mst-eipf02
+  internalIp: 192.168.0.22
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-mst-fip03
+spec:
+  eip: bb-mst-eipf03
+  internalIp: 192.168.0.23
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-fip01
+spec:
+  eip: bb-wrk-eipf01
+  internalIp: 192.168.0.61
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-fip02
+spec:
+  eip: bb-wrk-eipf02
+  internalIp: 192.168.0.62
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: bb-wrk-fip03
+spec:
+  eip: bb-wrk-eipf03
+  internalIp: 192.168.0.63

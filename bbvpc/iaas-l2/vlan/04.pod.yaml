@@ -1,0 +1,137 @@
+# 注1：未使用ovn.kubernetes.io/logical_switch注解声明子网络，则默认使用命名空间绑定的子网；如果命名空间未绑定子网，则默认使用ovn-default子网。
+# 注2：underlay/vlan网络目前无法使用集群自带的coredns，所以必须使用外部DNS。
+# 注3：kubeovn目前不支持给pod分配两个相同子网的虚拟网卡！！！后续版本可能会支持。
+---
+
+# 未指定子网，则隐式使用namespace绑定的子网【vlan-203】
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: l2k8s-vlan
+  name: centos-sshd
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 显式指定使用【vlan-203】子网
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: l2k8s-vlan
+  name: centos-sshd-vlan-203
+  annotations:
+    # 显式指定使用【vlan-203】子网
+    ovn.kubernetes.io/logical_switch: vlan-203
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 指定使用【underlay】子网
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: l2k8s-vlan
+  name: centos-sshd-underlay
+  annotations:
+    # 指定使用【underlay】子网
+    ovn.kubernetes.io/logical_switch: underlay
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 双网络
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: l2k8s-vlan
+  name: double-net
+  annotations:
+    # 主网卡显示指定使用【vlan-203】子网
+    ovn.kubernetes.io/logical_switch: vlan-203
+    # 附加一张网卡
+    k8s.v1.cni.cncf.io/networks: net1
+    # 次网卡使用【underlay】子网
+    net1.l2k8s-vlan.ovn.kubernetes.io/logical_switch: underlay
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 三网络
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: l2k8s-vlan
+  name: three-net
+  annotations:
+    # 主网卡显示指定使用【vlan-203】子网
+    ovn.kubernetes.io/logical_switch: vlan-203
+    # 附加两张网卡
+    k8s.v1.cni.cncf.io/networks: net1,net2
+    # 次网卡使用【underlay】子网
+    net1.l2k8s-vlan.ovn.kubernetes.io/logical_switch: underlay
+    # 第三张网卡使用【vlan-202】子网
+    net2.l2k8s-vlan.ovn.kubernetes.io/logical_switch: vlan-202
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+

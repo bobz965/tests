@@ -1,0 +1,59 @@
+# 使用ipvlan作为附加网卡，使用kubeovn作为ipam
+# 【注意】由于kubeovn的限制，使用kubeovn作为ipam但CNI不是kubeovn的虚拟网卡，不能作为主网卡。
+#
+kind: NetworkAttachmentDefinition
+apiVersion: "k8s.cni.cncf.io/v1"
+metadata:
+  name: ipvlan
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "ipvlan",
+      "master": "eth1",
+      "mode": "l2",
+      "ipam": {
+        "type": "kube-ovn",
+        "server_socket": "/run/openvswitch/kube-ovn-daemon.sock",
+        "provider": "ipvlan.default"
+      }
+    }'
+---
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: ipvlan
+spec:
+  protocol: IPv4
+  provider: ipvlan.default
+  cidrBlock: 172.33.0.0/16
+  # 不想被分配的IP地址或地址段。如果未设置，则网关地址会被自动加入excludeIPs列表
+  excludeIps:
+  - 172.33.0.1..172.33.253.255
+  - 172.33.255.254
+---
+
+#
+# 以下 Pod 将获得两个网卡，其中k8s默认网络（kubeovn）为主网卡，ipvlan为次网卡
+# 但是并不会为次网卡分配路由，默认路由还是kubeovn网络
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multus-ipvlan
+  annotations:
+    # 通常要加上命名空间，如果该pod与NetworkAttachmentDefinition在相同的命名空间，则可以省略
+    k8s.v1.cni.cncf.io/networks: default/ipvlan
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+---
+

@@ -46,3 +46,33 @@ kubectl taint node hci-ctrl-1 node.kubevirt.io/dedicated=ctrl:NoSchedule
 kubectl taint node hci-ctrl-2 node.kubevirt.io/dedicated=ctrl:NoSchedule
 kubectl taint node hci-ctrl-3 node.kubevirt.io/dedicated=ctrl:NoSchedule
 
+
+
+
+# clean 
+
+ kubectl label node hci-compute-xnet-1 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xnet-2 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xnet-3 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xnet-4 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xnet-5 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xnet-6 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-1 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-2 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-3 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-4 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-5 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xnet-6 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xsto-1 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xsto-2 node.kubevirt.io/dedicated-
+ kubectl label node hci-compute-xsto-3 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xsto-1 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xsto-2 node.kubevirt.io/dedicated-
+ kubectl taint node hci-compute-xsto-3 node.kubevirt.io/dedicated-
+ kubectl label node hci-ctrl-1 node.kubevirt.io/dedicated-
+ kubectl label node hci-ctrl-2 node.kubevirt.io/dedicated-
+ kubectl label node hci-ctrl-3 node.kubevirt.io/dedicated-
+ kubectl taint node hci-ctrl-1 node.kubevirt.io/dedicated-
+ kubectl taint node hci-ctrl-2 node.kubevirt.io/dedicated-
+ kubectl taint node hci-ctrl-3 node.kubevirt.io/dedicated-
+

@@ -1,0 +1,93 @@
+# 使用 ipvlan 作为附加网卡，IPAM采用 host-local 模式
+kind: NetworkAttachmentDefinition
+apiVersion: "k8s.cni.cncf.io/v1"
+metadata:
+  name: ipvlan-host-local
+spec:
+  # IP 从 90 ~ 99 共 10 个可用地址
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "ipvlan",
+      "master": "eth1",
+      "mode": "l2",
+      "ipam": {
+        "type": "host-local",
+        "subnet": "172.33.0.0/16",
+        "rangeStart": "172.33.254.0",
+        "rangeEnd": "172.33.254.255",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ],
+        "gateway": "172.33.0.1"
+      }
+    }'
+---
+#
+# 以下 Pod 将获得两个网卡，其中k8s默认网络（kubeovn）为主网卡，ipvlan为次网卡
+# 但是并不会为次网卡分配路由，默认路由还是kubeovn网络
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multus-ipvlan-host-local
+  annotations:
+    # 通常要加上命名空间，如果该pod与NetworkAttachmentDefinition在相同的命名空间，则可以省略
+    k8s.v1.cni.cncf.io/networks: default/ipvlan-host-local
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+---
+
+# 以下 Pod 只会获得一个网卡，即 ipvlan 网卡
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multus-ipvlan-host-local-as-default
+  annotations:
+    # 必须指定命名空间
+    v1.multus-cni.io/default-network: default/ipvlan-host-local
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+---
+# 以下 Pod 只会获得一个网卡，即 ipvlan 网卡
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multus-ipvlan-host-local-as-default-1
+  annotations:
+    # 必须指定命名空间
+    v1.multus-cni.io/default-network: default/ipvlan-host-local
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+

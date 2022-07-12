@@ -1,0 +1,87 @@
+# 在虚拟机上部署单机版二级kubernetes
+# 采用双网卡模式，其中第二网卡作为二级k8s网络的桥接网卡
+# 由于数据需要持久化，所以我们采用pvc卷作为虚拟磁盘
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: k8s-test
+  namespace: l2k8s-vlan
+spec:
+  running: true
+  template:
+    metadata:
+      annotations:
+        # 注意：这些注解不是写上第一级的'metadata'下，而是在'template/metadata'下。
+        # 需要固定IP地址，否则二级k8s在重启后可能会故障
+        ovn.kubernetes.io/ip_address: 10.5.203.3
+        # 第二、三网卡用作二级k8s的桥接网卡，可以无需指定IP。
+        # 目前无法实现只创建接口但不分配IP的功能，所以每个接口还是会占用一个IP.
+        net1.l2k8s-vlan.ovn.kubernetes.io/logical_switch: underlay
+        net2.l2k8s-vlan.ovn.kubernetes.io/logical_switch: vlan-48
+    spec:
+      domain:
+        devices:
+          disks:
+          - name: pvcdisk
+          - name: cloudinitdisk
+          interfaces:
+          - name: eth0
+            bridge: {}
+          - name: eth1
+            bridge: {} 
+          - name: eth2
+            bridge: {} 
+        resources:
+          requests:
+            # 注：如果cpu与内存过低，可能会无法在二级k8s中部署multus-cni，具体最低要求尚未确定
+            cpu: 4
+            memory: 8Gi
+      networks:
+      - name: eth0
+        pod: {}
+      - name: eth1
+        multus:
+          networkName: net1
+      - name: eth2
+        multus:
+          networkName: net2
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+        - 10.5.200.10
+        - 10.100.1.10
+        options:
+        - name: ndots
+          value: "2"
+      volumes:
+      - name: pvcdisk
+        dataVolume:
+          name: k8s-test
+      - name: cloudinitdisk
+        cloudInitConfigDrive:
+          userData: "#cloud-config"
+      accessCredentials:
+      - sshPublicKey:
+          source:
+            secret:
+              secretName: ssh-pub-key
+          propagationMethod:
+            configDrive: {}
+  dataVolumeTemplates:
+  - metadata:
+      name: k8s-test
+    spec:
+      pvc:
+        volumeMode: Block
+        accessModes:
+        - ReadWriteMany
+        resources:
+          requests:
+            storage: 30Gi
+      source:
+        http:
+          # 由于vlan模式下的cdi-importer的dns有问题，所以下面的url只能使用ip地址，不能用域名
+          url: http://10.5.32.1/Cloud-Image/CentOS-7-x86_64-Docker-CE.qcow2
+---
+

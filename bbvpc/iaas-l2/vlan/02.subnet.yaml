@@ -1,0 +1,20 @@
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: vlan-203
+spec:
+  # 绑定到此子网的命名空间列表。如果要将命名空间绑定到此子网，请编辑命名空间名称并将其添加到此字段。
+  namespaces:
+  - l2k8s-vlan
+  cidrBlock: 10.5.203.0/24
+  excludeIps:
+  # 10.5.203.1                  # 默认网关
+  # 10.5.203.2..10.5.203.29     # 虚拟机ip
+  # 10.5.203.30..10.5.203.79    # 二级ipvlan pod ip
+  # 10.5.203.80..10.5.203.99    # 二级lb svc ip
+  - 10.5.203.1..10.5.203.99
+  # 10.5.203.100..10.5.203.253 【pod可用IP】
+  - 10.5.203.254                # 外部网关
+  default: false
+  gateway: 10.5.203.254
+  vlan: vlan-203

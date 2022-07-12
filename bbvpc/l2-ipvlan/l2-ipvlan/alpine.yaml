@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: alpine-sshd
+  annotations:
+    fip.cloud.yealink.com/eip-name: "alpine-sshd"
+    fip.cloud.yealink.com/enable: "true"
+spec:
+  containers:
+  - name: alpine-sshd
+    image: yealink.top/system/alpine-sshd:latest
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+    env:
+      - name: SSH_PWD
+        value: "yealink.top"

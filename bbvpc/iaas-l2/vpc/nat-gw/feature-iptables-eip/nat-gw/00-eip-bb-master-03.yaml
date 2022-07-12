@@ -1,0 +1,6 @@
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip-bb-master-03
+spec:
+  natGwDp: bbgw01

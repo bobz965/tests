@@ -1,0 +1,184 @@
+# 使用ipvlan作为附加网卡，使用whereabouts作为ipam
+# whereabouts的用法：
+#   "range": 【必填项】总的IP范围，分配IP时不包括首个地址与广播地址。也可以通过'-'符号指定最后一个可用IP地址。
+#    "range": "172.33.254.0/24",
+#    "range": "172.33.254.10-172.33.254.20/24",
+#
+#    "range_start/range_end": 【可选项】在“range”的基础上进一步限制可分配的IP的起始地址与结束地址。
+#    "range_start": "172.33.254.100",
+#    "range_end": "172.33.254.110",
+#
+#    "exclude": 【可选项】排除项，必须是CDIR表示法，单个IP也要加上“掩码”值；可以有多个排除项。
+#    "exclude": [ "172.33.254.0/25" ],
+# 【注意】whereablouts文档中提到的"gateway"字段是无效的，必须要用"routes"。
+
+---
+
+kind: NetworkAttachmentDefinition
+apiVersion: "k8s.cni.cncf.io/v1"
+metadata:
+  name: vpc
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "ipvlan",
+      "master": "eth1",
+      "mode": "l2",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "172.33.0.0/16",
+        "range_start": "172.33.64.0",
+        "range_end": "172.33.127.255",
+        "exclude": [ "172.33.64.0/32", "172.33.64.0/26" ],
+        "gateway": "172.33.0.1",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ]
+      }
+    }'
+
+---
+
+kind: NetworkAttachmentDefinition
+apiVersion: "k8s.cni.cncf.io/v1"
+metadata:
+  name: underlay
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "ipvlan",
+      "master": "eth2",
+      "mode": "l2",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "10.5.32.0/20",
+        "range_start": "10.5.34.0",
+        "range_end": "10.5.34.255",
+        "exclude": [ "10.5.34.0/32", "10.5.34.0/26" ],
+        "gateway": "10.5.47.254",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ]
+      }
+    }'
+
+---
+
+kind: NetworkAttachmentDefinition
+apiVersion: "k8s.cni.cncf.io/v1"
+metadata:
+  name: vlan
+spec:
+  config: '{
+      "cniVersion": "0.3.1",
+      "type": "ipvlan",
+      "master": "eth3",
+      "mode": "l2",
+      "ipam": {
+        "type": "whereabouts",
+        "range": "10.5.208.0/24",
+        "range_start": "10.5.208.100",
+        "range_end": "10.5.208.199",
+        "gateway": "10.5.208.254",
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+        ]
+      }
+    }'
+
+---
+
+# 单网卡模式，使用【bbvpc01-subnet-32】子网
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ipvlan-with-vpc-subnet-32
+  annotations:
+    # 必须指定命名空间
+    v1.multus-cni.io/default-network: default/vpc
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 单网卡模式，使用【underlay】子网
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ipvlan-with-underlay
+  annotations:
+    # 必须指定命名空间
+    v1.multus-cni.io/default-network: default/underlay
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 单网卡模式，使用【bbvlan-208】子网
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ipvlan-with-vlan
+  annotations:
+    # 必须指定命名空间
+    v1.multus-cni.io/default-network: default/vlan
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+---
+
+# 多网卡模式
+kind: Pod
+apiVersion: v1
+metadata:
+  name: ipvlan-multus
+  annotations:
+    # 通常要加上命名空间，如果该pod与NetworkAttachmentDefinition在相同的命名空间，则可以省略
+    k8s.v1.cni.cncf.io/networks: default/vpc,default/underlay,default/vlan
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+  # 使用外部DNS
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+---

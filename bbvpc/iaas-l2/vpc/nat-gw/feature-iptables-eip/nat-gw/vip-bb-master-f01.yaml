@@ -1,0 +1,6 @@
+apiVersion: kubeovn.io/v1
+kind: VirtualIP
+metadata:
+  name: bb-vip-01
+spec:
+  subnet: bbvpc01-subnet1

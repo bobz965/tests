@@ -1,0 +1,60 @@
+apiVersion: kubeovn.io/v1
+kind: ProviderNetwork
+metadata:
+  name: vlan
+spec:
+  defaultInterface: eth1
+---
+apiVersion: kubeovn.io/v1
+kind: Vlan
+metadata:
+  name: underlay
+spec:
+  provider: vlan
+  id: 0
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: underlay
+  labels:
+    name: underlay
+---
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: underlay
+spec:
+  # 子网的CIDR
+  cidrBlock: 172.33.0.0/16
+  # 不想被分配的IP地址或地址段。如果未设置，则网关地址会被自动加入excludeIPs列表
+  excludeIps:
+  - 172.33.0.1..172.33.253.255
+  - 172.33.255.254
+  default: false
+  gateway: 172.33.0.1
+  vlan: underlay
+  namespaces:
+    - underlay
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos-sshd
+  namespace: underlay
+  labels:
+    app: centos-sshd
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+    - 10.5.200.10
+    - 10.100.1.10
+    options:
+    - name: ndots
+      value: "2"
+
+

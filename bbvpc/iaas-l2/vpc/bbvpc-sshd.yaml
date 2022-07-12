@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bbvpc01-sshd
+  namespace: bbvpc01
+spec:
+  containers:
+  - name: alpine-sshd
+    image: yealink.top/system/alpine-sshd:latest
+

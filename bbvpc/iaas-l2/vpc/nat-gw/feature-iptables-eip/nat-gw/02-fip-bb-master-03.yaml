@@ -1,0 +1,7 @@
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip-bb-master-03
+spec:
+  eip: eip-bb-master-03
+  internalIp: 192.168.0.13

@@ -1,0 +1,27 @@
+#TODO: Force DaemonSet to not run on master - see
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: kubevirt-csi-test
+  namespace: kubevirt-csi-driver
+spec:
+  selector:
+    matchLabels:
+      app: kubevirt-csi-driver1
+  template:
+    metadata:
+      labels:
+        app: kubevirt-csi-driver1
+    spec:
+      hostNetwork: true
+      #serviceAccount: kubevirt-csi-node-sa
+      #priorityClassName: system-node-critical
+      #tolerations:
+      #  - operator: Exists
+      containers:
+        - name: csi-driver
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+          #imagePullPolicy: Always
+          image: busybox

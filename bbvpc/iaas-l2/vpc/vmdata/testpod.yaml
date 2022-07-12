@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: centos-sshd
+spec:
+  containers:
+  - name: centos-sshd
+    image: yealink.top/system/centos-sshd:latest
+

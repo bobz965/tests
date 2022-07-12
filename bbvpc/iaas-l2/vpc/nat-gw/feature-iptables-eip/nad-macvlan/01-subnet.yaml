@@ -1,0 +1,17 @@
+apiVersion: kubeovn.io/v1
+kind: Subnet
+metadata:
+  name: ovn-vpc-external-network
+spec:
+  vpc: ovn-cluster
+  protocol: IPv4
+  provider: ovn-vpc-external-network.kube-system
+  cidrBlock: 10.5.48.0/20
+  gateway: 10.5.63.254
+  excludeIps:
+    # 48子段保留给物理机使用;
+    # 49子段保留给underlay子网使用；
+    # 50~55子段为静态分配的IP，一个测试场景使用一个子段；
+    # 56~63子段为动态分配的IP；
+    # 10.5.63.254为网关地址，kubeovn会自动将它加入excludeIps
+    - 10.5.48.1..10.5.55.255
