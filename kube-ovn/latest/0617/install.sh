@@ -5,7 +5,7 @@ IPV6=${IPV6:-false}
 DUAL_STACK=${DUAL_STACK:-false}
 ENABLE_SSL=${ENABLE_SSL:-false}
 ENABLE_VLAN=${ENABLE_VLAN:-false}
-CHECK_GATEWAY=${CHECK_GATEWAY:-true}
+CHECK_GATEWAY=${CHECK_GATEWAY:-false}
 LOGICAL_GATEWAY=${LOGICAL_GATEWAY:-false}
 ENABLE_MIRROR=${ENABLE_MIRROR:-false}
 VLAN_NIC=${VLAN_NIC:-}
@@ -13,6 +13,7 @@ HW_OFFLOAD=${HW_OFFLOAD:-false}
 ENABLE_LB=${ENABLE_LB:-true}
 ENABLE_NP=${ENABLE_NP:-false}
 ENABLE_EIP_SNAT=${ENABLE_EIP_SNAT:-true}
+LS_DNAT_MOD_DL_DST=${LS_DNAT_MOD_DL_DST:-true}
 WITHOUT_KUBE_PROXY=${WITHOUT_KUBE_PROXY:-false}
 ENABLE_EXTERNAL_VPC=${ENABLE_EXTERNAL_VPC:-true}
 CNI_CONFIG_PRIORITY=${CNI_CONFIG_PRIORITY:-01}
@@ -1795,7 +1796,7 @@ spec:
               command:
                 - bash
                 - /kube-ovn/ovs-dpdk-healthcheck.sh
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 5
             failureThreshold: 5
             timeoutSeconds: 45
@@ -1890,7 +1891,6 @@ rules:
       - vlans/status
       - provider-networks
       - provider-networks/status
-      - networks
       - security-groups
       - security-groups/status
       - htbqoses
@@ -2278,7 +2278,7 @@ spec:
               command:
                 - bash
                 - /kube-ovn/ovs-healthcheck.sh
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 5
             failureThreshold: 5
             timeoutSeconds: 45
@@ -2435,7 +2435,7 @@ spec:
               command:
                 - bash
                 - /kube-ovn/ovs-healthcheck.sh
-            initialDelaySeconds: 10
+            initialDelaySeconds: 60
             periodSeconds: 5
             failureThreshold: 5
             timeoutSeconds: 45
@@ -2571,8 +2571,11 @@ spec:
           - --enable-external-vpc=$ENABLE_EXTERNAL_VPC
           - --logtostderr=false
           - --alsologtostderr=true
+          - --gc-interval=$GC_INTERVAL
+          - --inspect-interval=$INSPECT_INTERVAL
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --v=5
           env:
             - name: ENABLE_SSL
               value: "$ENABLE_SSL"

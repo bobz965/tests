@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 data:
   #image: kubeovn/vpc-nat-gateway:v1.10.0
-  image: registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.1.235
+  image: registry.yealinkops.com/third_party/kolla/vpc-nat-gateway:v0.1.238
   enable-vpc-nat-gw: "true"
 metadata:
   name: ovn-vpc-nat-gw-config

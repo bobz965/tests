@@ -41,13 +41,14 @@ spec:
       hostNetwork: true
       containers:
         - name: kube-ovn-controller
-          image: "kubeovn/kube-ovn:v1.11.0"
+          #image: "kubeovn/kube-ovn:v1.11.0"
+          image: "cr.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.242"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
           - --default-cidr=10.16.0.0/16
           - --default-gateway=10.16.0.1
-          - --default-gateway-check=true
+          - --default-gateway-check=false
           - --default-logical-gateway=false
           - --default-exclude-ips=
           - --node-switch-cidr=100.64.0.0/16
@@ -62,8 +63,11 @@ spec:
           - --enable-external-vpc=true
           - --logtostderr=false
           - --alsologtostderr=true
+          - --gc-interval=360
+          - --inspect-interval=20
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --v=5
           env:
             - name: ENABLE_SSL
               value: "false"

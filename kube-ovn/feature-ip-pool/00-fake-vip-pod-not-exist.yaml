@@ -1,0 +1,8 @@
+apiVersion: kubeovn.io/v1
+kind: Vip
+metadata:
+  labels:
+    ovn.kubernetes.io/ip_reserved: fake-static-ip.bb1
+  name: fake-vip-dynamic-01
+spec:
+  subnet: bb1-subnet1
