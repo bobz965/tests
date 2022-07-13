@@ -51,6 +51,8 @@ kubectl taint node hci-ctrl-3 node.kubevirt.io/dedicated=ctrl:NoSchedule
 
 # clean 
 
+ exit 0
+
  kubectl label node hci-compute-xnet-1 node.kubevirt.io/dedicated-
  kubectl label node hci-compute-xnet-2 node.kubevirt.io/dedicated-
  kubectl label node hci-compute-xnet-3 node.kubevirt.io/dedicated-
