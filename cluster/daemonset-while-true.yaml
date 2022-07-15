@@ -1,0 +1,54 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: host-pinger
+  namespace: kube-system
+  annotations:
+    kubernetes.io/description: |
+      This daemon set launches the host-pinger daemon.
+spec:
+  selector:
+    matchLabels:
+      app: host-pinger
+  template:
+    metadata:
+      labels:
+        app: host-pinger
+    spec:
+      tolerations:
+      - operator: Exists
+      hostNetwork: true
+      hostPID: true
+      containers:
+      - name: host-pinger
+        image: "czerwonk/ping_exporter"
+        imagePullPolicy: IfNotPresent
+        command:
+          - sh
+          - -c 
+          - "while true; do sleep 10000; done"
+        securityContext:
+          runAsUser: 0
+          privileged: true
+        volumeMounts:
+          - mountPath: /etc/host-pinger
+            name: pinger-conf
+          - mountPath: /etc/localtime
+            name: localtime
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+      nodeSelector:
+        kubernetes.io/os: "linux"
+      volumes:
+        - name: pinger-conf
+          hostPath:
+            path: /etc/host-pinger
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+

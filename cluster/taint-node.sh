@@ -42,9 +42,9 @@ kubectl taint node hci-compute-xsto-3 node.kubevirt.io/dedicated=xsto:NoSchedule
 kubectl label node hci-ctrl-1 node.kubevirt.io/dedicated=ctrl
 kubectl label node hci-ctrl-2 node.kubevirt.io/dedicated=ctrl
 kubectl label node hci-ctrl-3 node.kubevirt.io/dedicated=ctrl
-kubectl taint node hci-ctrl-1 node.kubevirt.io/dedicated=ctrl:NoSchedule
-kubectl taint node hci-ctrl-2 node.kubevirt.io/dedicated=ctrl:NoSchedule
-kubectl taint node hci-ctrl-3 node.kubevirt.io/dedicated=ctrl:NoSchedule
+#kubectl taint node hci-ctrl-1 node.kubevirt.io/dedicated=ctrl:NoSchedule
+#kubectl taint node hci-ctrl-2 node.kubevirt.io/dedicated=ctrl:NoSchedule
+#kubectl taint node hci-ctrl-3 node.kubevirt.io/dedicated=ctrl:NoSchedule
 
 
 
