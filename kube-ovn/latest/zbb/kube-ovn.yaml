@@ -42,7 +42,7 @@ spec:
       containers:
         - name: kube-ovn-controller
           #image: "kubeovn/kube-ovn:v1.11.0"
-          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.232"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.250"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
