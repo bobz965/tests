@@ -1,4 +1,4 @@
-FROM registry.yealinkops.com/third_party/kolla/golang:1.17
+FROM registry.yealinkops.com/third_party/kolla/golang:1.18
 ARG GOPROXY
 ENV GOPROXY $GOPROXY
 RUN GOPROXY=https://goproxy.cn

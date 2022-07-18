@@ -1,4 +1,4 @@
-FROM registry.yealinkops.com/third_party/kolla/l1-kube-ovn-base:v0.0.50 as l1-ovn-builder
+FROM registry.yealinkops.com/third_party/kolla/l1-kube-ovn-base:v0.1.250 as l1-ovn-builder
 ARG GOPROXY
 ENV GOPROXY $GOPROXY
 WORKDIR /kube-ovn
