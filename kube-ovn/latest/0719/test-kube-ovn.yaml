@@ -42,13 +42,14 @@ spec:
       containers:
         - name: kube-ovn-controller
           #image: "kubeovn/kube-ovn:v1.11.0"
-          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:v0.1.203"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:dev-1.11.2"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
+          - --v=5
           - --default-cidr=10.16.0.0/16
           - --default-gateway=10.16.0.1
-          - --default-gateway-check=true
+          - --default-gateway-check=false
           - --default-logical-gateway=false
           - --default-exclude-ips=
           - --node-switch-cidr=100.64.0.0/16
@@ -59,12 +60,15 @@ spec:
           - --pod-nic-type=veth-pair
           - --enable-lb=true
           - --enable-np=false
-          - --enable-eip-snat=true
-          - --enable-external-vpc=true
+          - --enable-eip-snat=false
+          - --enable-external-vpc=false
           - --logtostderr=false
           - --alsologtostderr=true
+          - --gc-interval=360
+          - --inspect-interval=20
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --keep-vm-ip=true
           env:
             - name: ENABLE_SSL
               value: "false"
@@ -207,6 +211,9 @@ spec:
           - name: RPMS
             value: openvswitch-kmod
         volumeMounts:
+          - name: host-modules
+            mountPath: /lib/modules
+            readOnly: true
           - name: shared-dir
             mountPath: /var/lib/kubelet/pods
           - mountPath: /etc/openvswitch
@@ -257,6 +264,9 @@ spec:
       nodeSelector:
         kubernetes.io/os: "linux"
       volumes:
+        - name: host-modules
+          hostPath:
+            path: /lib/modules
         - name: shared-dir
           hostPath:
             path: /var/lib/kubelet/pods

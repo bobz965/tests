@@ -1,10 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ovn-config
-  namespace: kube-system
-data:
-  defaultNetworkType: 'geneve'
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -50,6 +43,8 @@ rules:
       - iptables-fip-rules/status
       - iptables-dnat-rules/status
       - iptables-snat-rules/status
+      - switch-lb-rules
+      - switch-lb-rules/status
     verbs:
       - "*"
   - apiGroups:
@@ -75,6 +70,7 @@ rules:
     resources:
       - networkpolicies
       - services
+      - services/status
       - endpoints
       - statefulsets
       - daemonsets
@@ -96,6 +92,12 @@ rules:
       - create
       - patch
       - update
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - "*"
   - apiGroups:
       - "k8s.cni.cncf.io"
     resources:
@@ -226,7 +228,7 @@ spec:
       hostNetwork: true
       containers:
         - name: ovn-central
-          image: "kubeovn/kube-ovn:v1.10.2"
+          image: "kubeovn/kube-ovn:v1.11.0"
           imagePullPolicy: IfNotPresent
           command: ["/kube-ovn/start-db.sh"]
           securityContext:
@@ -236,7 +238,7 @@ spec:
             - name: ENABLE_SSL
               value: "false"
             - name: NODE_IPS
-              value: 10.122.16.31,10.122.16.32,10.122.16.33,
+              value: 10.120.25.50,10.120.24.193,10.120.25.72,
             - name: POD_IP
               valueFrom:
                 fieldRef:
@@ -359,7 +361,7 @@ spec:
       hostPID: true
       containers:
         - name: openvswitch
-          image: "kubeovn/kube-ovn:v1.10.2"
+          image: "kubeovn/kube-ovn:v1.11.0"
           imagePullPolicy: IfNotPresent
           command: ["/kube-ovn/start-ovs.sh"]
           securityContext:
@@ -381,7 +383,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: OVN_DB_IPS
-              value: 10.122.16.31,10.122.16.32,10.122.16.33,
+              value: 10.120.25.50,10.120.24.193,10.120.25.72,
           volumeMounts:
             - mountPath: /lib/modules
               name: host-modules
@@ -433,7 +435,6 @@ spec:
               memory: 1000Mi
       nodeSelector:
         kubernetes.io/os: "linux"
-        ovn.kubernetes.io/ovs_dp_type: kernel
       volumes:
         - name: host-modules
           hostPath:

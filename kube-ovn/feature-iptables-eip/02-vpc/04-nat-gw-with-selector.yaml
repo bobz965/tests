@@ -1,0 +1,10 @@
+kind: VpcNatGateway
+apiVersion: kubeovn.io/v1
+metadata:
+  name: gw1
+spec:
+  vpc: vpc1
+  subnet: vpc1-subnet1
+  lanIp: 192.168.0.254
+  selector:
+    - "node.kubevirt.io/dedicated: xsto"
