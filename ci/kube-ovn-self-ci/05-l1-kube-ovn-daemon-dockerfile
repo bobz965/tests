@@ -1,0 +1,19 @@
+FROM registry.yealinkops.com/third_party/kolla/l1-kube-ovn-base:v0.1.250 as l1-ovn-builder
+ARG GOPROXY
+ENV GOPROXY $GOPROXY
+WORKDIR /kube-ovn
+COPY kube-ovn/ .
+RUN cd cmd/ && CGO_ENABLED=0 GOOS=linux go build \
+    -ldflags \
+    "-X \"k8s.io/client-go/pkg/version.gitCommit=`git rev-parse HEAD`\" \
+    -X \"k8s.io/client-go/pkg/version.buildDate=`date -u +'%Y-%m-%dT%H:%M:%SZ'`\"" -o kube-ovn-daemon .
+RUN cd cmd/ && CGO_ENABLED=0 GOOS=linux go build \
+    -ldflags \
+    "-X \"k8s.io/client-go/pkg/version.gitCommit=`git rev-parse HEAD`\" \
+    -X \"k8s.io/client-go/pkg/version.buildDate=`date -u +'%Y-%m-%dT%H:%M:%SZ'`\"" -o kube-ovn .
+
+FROM registry.yealinkops.com/third_party/kolla/kubeovn/kube-ovn:v1.11.0
+WORKDIR /kube-ovn
+COPY --from=l1-ovn-builder /kube-ovn/cmd/kube-ovn-daemon /kube-ovn/kube-ovn-daemon
+COPY --from=l1-ovn-builder /kube-ovn/cmd/kube-ovn /kube-ovn/kube-ovn
+RUN chmod +x /kube-ovn/*
