@@ -91,10 +91,11 @@ users:
 EOF
 
 exit 0
+USERNAME=fip-operator
+kubectl get ServiceAccount  -A | grep "$USERNAME"
+kubectl get Role -A | grep "$USERNAME"
+kubectl get RoleBinding -A | grep "$USERNAME"
 
-kubectl delete CertificateSigningRequest fip-operator.yealink
-kubectl delete Role -n yealink                fip-operator  
-kubectl delete RoleBinding -n yealink                fip-operator   
 
 # ref: https://docs.bitnami.com/tutorials/configure-rbac-in-your-kubernetes-cluster/#use-case-1-create-user-with-limited-namespace-access
 # key ref: https://computingforgeeks.com/restrict-kubernetes-service-account-users-to-a-namespace-with-rbac/
