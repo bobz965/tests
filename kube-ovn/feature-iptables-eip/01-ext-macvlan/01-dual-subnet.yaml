@@ -5,7 +5,7 @@ metadata:
 spec:
   protocol: Dual
   provider: ovn-vpc-external-network.kube-system
-  cidrBlock: 172.20.10.0/24,fd00:172:20:10:/120
+  cidrBlock: 172.20.10.0/24,fd00:10:16::/120
   gateway: 172.20.10.2
   excludeIps:
   - 172.20.10.1..172.20.10.200

@@ -42,7 +42,7 @@ spec:
       containers:
         - name: kube-ovn-controller
           #image: "kubeovn/kube-ovn:v1.11.0"
-          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:dev-1.11.5"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:dev-1.11.12"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
@@ -174,7 +174,8 @@ spec:
             name: local-bin
       containers:
       - name: cni-server
-        image: "kubeovn/kube-ovn:v1.11.0"
+        #image: "kubeovn/kube-ovn:v1.11.0"
+        image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-daemon:dev-1.11.9"
         imagePullPolicy: IfNotPresent
         command:
           - bash
