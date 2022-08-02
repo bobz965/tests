@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: host-pinger
+  namespace: kube-system
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "9427"
+    prometheus.io/scheme: http
+    prometheus.io/scrape: "true"
+spec:
+  selector:
+    app: host-pinger
+  ports:
+  - protocol: "TCP"
+    port: 9427
+    targetPort: 9427
+  type: LoadBalancer
