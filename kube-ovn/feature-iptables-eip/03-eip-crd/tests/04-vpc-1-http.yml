@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    ovn.kubernetes.io/logical_switch: vpc1-subnet1
+  namespace: vpc1
+  name: vpc-1-http
+spec:
+  containers:
+    - name: vpc-1-http
+      image: "nginxdemos/hello"
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN

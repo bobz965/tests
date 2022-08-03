@@ -1,0 +1,805 @@
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip01
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip01
+spec:
+  eip: eip01
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip02
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip02
+spec:
+  eip: eip02
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip03
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip03
+spec:
+  eip: eip03
+  internalIp: 192.168.0.4
+
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip04
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip04
+spec:
+  eip: eip04
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip05
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip05
+spec:
+  eip: eip05
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip06
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip06
+spec:
+  eip: eip06
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip07
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip07
+spec:
+  eip: eip07
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip08
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip08
+spec:
+  eip: eip08
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip09
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip09
+spec:
+  eip: eip09
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip10
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip10
+spec:
+  eip: eip10
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip11
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip11
+spec:
+  eip: eip11
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip12
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip12
+spec:
+  eip: eip12
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip13
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip13
+spec:
+  eip: eip13
+  internalIp: 192.168.0.4
+
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip14
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip14
+spec:
+  eip: eip14
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip15
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip15
+spec:
+  eip: eip15
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip16
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip16
+spec:
+  eip: eip16
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip17
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip17
+spec:
+  eip: eip17
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip18
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip18
+spec:
+  eip: eip18
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip19
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip19
+spec:
+  eip: eip19
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip20
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip20
+spec:
+  eip: eip20
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip21
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip21
+spec:
+  eip: eip21
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip22
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip22
+spec:
+  eip: eip22
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip23
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip23
+spec:
+  eip: eip23
+  internalIp: 192.168.0.4
+
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip24
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip24
+spec:
+  eip: eip24
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip25
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip25
+spec:
+  eip: eip25
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip26
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip26
+spec:
+  eip: eip26
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip27
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip27
+spec:
+  eip: eip27
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip28
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip28
+spec:
+  eip: eip28
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip29
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip29
+spec:
+  eip: eip29
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip30
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip30
+spec:
+  eip: eip30
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip31
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip31
+spec:
+  eip: eip31
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip32
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip32
+spec:
+  eip: eip32
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip33
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip33
+spec:
+  eip: eip33
+  internalIp: 192.168.0.4
+
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip34
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip34
+spec:
+  eip: eip34
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip35
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip35
+spec:
+  eip: eip35
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip36
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip36
+spec:
+  eip: eip36
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip37
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip37
+spec:
+  eip: eip37
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip38
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip38
+spec:
+  eip: eip38
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip39
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip39
+spec:
+  eip: eip39
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip40
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip40
+spec:
+  eip: eip40
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip41
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip41
+spec:
+  eip: eip41
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip42
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip42
+spec:
+  eip: eip42
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip43
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip43
+spec:
+  eip: eip43
+  internalIp: 192.168.0.4
+
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip44
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip44
+spec:
+  eip: eip44
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip45
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip45
+spec:
+  eip: eip45
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip46
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip46
+spec:
+  eip: eip46
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip47
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip47
+spec:
+  eip: eip47
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip48
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip48
+spec:
+  eip: eip48
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip49
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip49
+spec:
+  eip: eip49
+  internalIp: 192.168.0.4
+---
+kind: IptablesEIP
+apiVersion: kubeovn.io/v1
+metadata:
+  name: eip50
+spec:
+  natGwDp: gw1
+
+---
+kind: IptablesFIPRule
+apiVersion: kubeovn.io/v1
+metadata:
+  name: fip50
+spec:
+  eip: eip50
+  internalIp: 192.168.0.4
