@@ -43,6 +43,8 @@ rules:
       - iptables-fip-rules/status
       - iptables-dnat-rules/status
       - iptables-snat-rules/status
+      - vpc-dnses
+      - vpc-dnses/status
       - switch-lb-rules
       - switch-lb-rules/status
     verbs:
@@ -355,7 +357,7 @@ spec:
           operator: Exists
         - key: CriticalAddonsOnly
           operator: Exists
-      priorityClassName: system-cluster-critical
+      priorityClassName: system-node-critical
       serviceAccountName: ovn
       hostNetwork: true
       hostPID: true

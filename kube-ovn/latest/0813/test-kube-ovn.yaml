@@ -41,7 +41,8 @@ spec:
       hostNetwork: true
       containers:
         - name: kube-ovn-controller
-          image: "kubeovn/kube-ovn:v1.11.0"
+          #image: "kubeovn/kube-ovn:v1.11.0"
+          image: "registry.yealinkops.com/third_party/kolla/l1-kube-ovn-controller:dev-1.11.13"
           imagePullPolicy: IfNotPresent
           args:
           - /kube-ovn/start-controller.sh
@@ -58,7 +59,7 @@ spec:
           - --pod-nic-type=veth-pair
           - --enable-lb=true
           - --enable-np=false
-          - --enable-eip-snat=false
+          - --enable-eip-snat=true
           - --enable-external-vpc=false
           - --logtostderr=false
           - --alsologtostderr=true
@@ -66,6 +67,7 @@ spec:
           - --inspect-interval=20
           - --log_file=/var/log/kube-ovn/kube-ovn-controller.log
           - --log_file_max_size=0
+          - --enable-lb-svc=false
           - --keep-vm-ip=true
           env:
             - name: ENABLE_SSL
@@ -153,7 +155,7 @@ spec:
           operator: Exists
         - key: CriticalAddonsOnly
           operator: Exists
-      priorityClassName: system-cluster-critical
+      priorityClassName: system-node-critical
       serviceAccountName: ovn
       hostNetwork: true
       hostPID: true
@@ -327,6 +329,7 @@ spec:
         component: network
         type: infra
     spec:
+      priorityClassName: system-node-critical
       serviceAccountName: ovn
       hostPID: true
       containers:
